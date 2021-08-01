@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styling/index.css';
 import Button from '../components/Button';
 import exampleCall from '../api/exampleCall';
@@ -7,6 +7,14 @@ import { Link } from 'react-router-dom';
 function showAlert() {
   alert('You just clicked the button!');
 }
+
+// const Home = () => {
+//   const [roomName = "testroom", setRoomName ] = React.useState("");
+// }
+
+// const handleRoomNameChange = (event) => {
+//     setRoomName(event.target.value);
+//   };
 
 async function callServer() {
   const response = await exampleCall();
@@ -17,16 +25,26 @@ async function callServer() {
   }
 }
 
-function IndexPage() {
+const IndexPage = () => {
+
+const [roomName, setRoomName] = useState("");
+
+const changeroomName = (e) => {
+  setRoomName(e.target.value);
+}
+
   return (
     <div id={'index-container'}>
       <div className={'spacer'} />
       <div className={'content'}>
         <h1>Traffic Jam</h1>
-        <Link to="/another">
-          <button className="styledBtn">Start</button>
-        </Link>
-        <Link to="/another">
+        <input
+          type="text"
+          id="lobby"
+          name="lobby"
+          onChange={changeroomName}
+        />
+        <Link to={`/` + roomName} >
           <button className="styledBtn">Join</button>
         </Link>
       </div>
@@ -34,5 +52,6 @@ function IndexPage() {
     </div>
   );
 }
+ 
 
 export default IndexPage;

@@ -2,21 +2,20 @@ import React from 'react';
 import './styling/App.css';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import IndexPage from './pages/IndexPage';
-import AnotherPage from './pages/AnotherPage';
+import Lobby from './pages/lobby';
 
 function App() {
 
   return (
     <div className="App">
-      <BrowserRouter>
+      <Lobby />
+      {<BrowserRouter>
         <Switch>
           <Route exact path={'/'} component={IndexPage} />
-          <Route exact path={'/another'} component={AnotherPage} />
-
-          {/* Default path if nothing else matches */}
+          <Route exact path="/:roomId" component={Lobby} />
           <Route path={'/'} component={IndexPage} />
         </Switch>
-      </BrowserRouter>
+      </BrowserRouter>}
     </div>
   );
 }
